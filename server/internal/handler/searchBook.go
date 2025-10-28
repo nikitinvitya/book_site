@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func (h *Handler) searchBookHandler(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) SearchBookHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
 
 	if query == "" {
