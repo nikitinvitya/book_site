@@ -9,7 +9,7 @@ import (
 	"net/url"
 )
 
-func (c *Client) GetBookList(ctx context.Context, subject string) (*model.SubjectResult, error) {
+func (c *Client) GetBooksBySubject(ctx context.Context, subject string) (*model.SubjectResult, error) {
 	endpoint, err := url.Parse(c.baseUrl)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse base url %w", err)
@@ -30,6 +30,7 @@ func (c *Client) GetBookList(ctx context.Context, subject string) (*model.Subjec
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var result model.SubjectResult
 	if err = json.NewDecoder(resp.Body).Decode(&result); err != nil {

@@ -11,7 +11,7 @@ func (h *Handler) GetBooksBySubjectHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	resp, err := h.service.GetBookList(r.Context(), subject)
+	resp, err := h.service.GetBooksBySubject(r.Context(), subject)
 	if err != nil {
 		ServerErrorResponse(w, http.StatusInternalServerError, "failed to fetch data", err)
 		return
