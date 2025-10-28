@@ -12,3 +12,19 @@ type BookDocs struct {
 	Title            string   `json:"title"`
 	FirstPublishYear int      `json:"first_publish_year"`
 }
+
+type SubjectResult struct {
+	Works []SubjectWork `json:"works"`
+}
+
+type SubjectWork struct {
+	Key              string   `json:"key"`
+	Authors          []Author `json:"authors"`
+	CoverID          int      `json:"cover_id"`
+	Title            string   `json:"title"`
+	FirstPublishYear int      `json:"first_publish_year"`
+}
+type Author struct {
+	Key  string `json:"key"`
+	Name string `json:"name"`
+}
