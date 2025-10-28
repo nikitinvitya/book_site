@@ -5,12 +5,17 @@ import (
 	"github.com/nikitinvitya/book_site/internal/model"
 )
 
-type DefiniteBookSearcher interface {
+type BookSearcher interface {
 	SearchBooks(ctx context.Context, query string) (*model.BookSearchResult, error)
 }
 
+type BookBySubjectGetter interface {
+	GetBooksBySubject(ctx context.Context, subject string) (*model.SubjectResult, error)
+}
+
 type BookService interface {
-	DefiniteBookSearcher
+	BookSearcher
+	BookBySubjectGetter
 }
 
 type Handler struct {

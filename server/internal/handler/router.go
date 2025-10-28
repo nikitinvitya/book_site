@@ -14,7 +14,8 @@ func InitRoutes(h *Handler) http.Handler {
 	router.Use(middleware.RequestID)
 
 	router.Route("/api", func(r chi.Router) {
-		r.Get("/searchBook", h.searchBookHandler)
+		r.Get("/searchBook", h.SearchBookHandler)
+		r.Get("/homepage", h.GetBooksBySubjectHandler)
 	})
 
 	return router
