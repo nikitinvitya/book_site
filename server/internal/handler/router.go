@@ -16,6 +16,8 @@ func InitRoutes(h *Handler) http.Handler {
 	router.Route("/api", func(r chi.Router) {
 		r.Get("/searchBook", h.SearchBookHandler)
 		r.Get("/homepage", h.GetBooksBySubjectHandler)
+
+		r.Post("/favBooks", h.GetFavoriteBooks)
 	})
 
 	return router
