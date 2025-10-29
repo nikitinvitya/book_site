@@ -5,6 +5,7 @@ import (
 	"github.com/nikitinvitya/book_site/internal/model"
 	"log/slog"
 	"net/http"
+	"sync"
 )
 
 func (h *Handler) GetFavoriteBooks(w http.ResponseWriter, r *http.Request) {
@@ -15,18 +16,32 @@ func (h *Handler) GetFavoriteBooks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var result []model.BookDocs
+	var (
+		result []model.BookDocs
+		wg     sync.WaitGroup
+		mu     sync.Mutex
+	)
 	for _, key := range req.Keys {
-		resp, err := h.service.SearchBooks(r.Context(), key)
-		if err != nil {
-			slog.Error("failed to fetch book by key", "key", key, "error", err)
-			continue
-		}
+		wg.Add(1)
 
-		if resp.NumFound > 0 {
-			result = append(result, resp.Docs[0])
-		}
+		go func(k string) {
+			defer wg.Done()
+
+			resp, err := h.service.SearchBooks(r.Context(), k)
+			if err != nil {
+				slog.Error("failed to fetch book by key", "key", k, "error", err)
+				return
+			}
+
+			if resp.NumFound > 0 {
+				mu.Lock()
+				result = append(result, resp.Docs[0])
+				mu.Unlock()
+			}
+		}(key)
 	}
+
+	wg.Wait()
 
 	SuccessResponse(w, http.StatusOK, result)
 }
