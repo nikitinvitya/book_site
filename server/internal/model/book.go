@@ -28,3 +28,7 @@ type Author struct {
 	Key  string `json:"key"`
 	Name string `json:"name"`
 }
+
+type BookKeys struct {
+	Keys []string `json:"keys"`
+}
