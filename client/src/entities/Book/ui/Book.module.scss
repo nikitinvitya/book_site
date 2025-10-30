@@ -1,0 +1,29 @@
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  text-align: start;
+  gap: 10px;
+
+  .coverWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .cover {
+    object-fit: cover;
+  }
+
+  p, span {
+    text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
