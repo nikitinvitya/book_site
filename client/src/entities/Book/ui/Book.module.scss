@@ -8,6 +8,7 @@
   border-radius: 10px;
   text-align: start;
   gap: 10px;
+  min-width: 0;
 
   .coverWrapper {
     position: relative;
@@ -26,4 +27,3 @@
     text-overflow: ellipsis;
   }
 }
-
