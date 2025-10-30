@@ -10,7 +10,7 @@ type BookSearcher interface {
 }
 
 type BookBySubjectGetter interface {
-	GetBooksBySubject(ctx context.Context, subject string) (*model.SubjectResult, error)
+	GetBooksBySubject(ctx context.Context, subject string, limit int, offset int) (*model.SubjectResult, error)
 }
 
 type BookService interface {
