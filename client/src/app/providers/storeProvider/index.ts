@@ -1,0 +1,1 @@
+export {useGenreStore} from './hooks/hooks'

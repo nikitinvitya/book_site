@@ -1,0 +1,1 @@
+export {BookList} from '@/widgets/BookList/ui/BookList'
