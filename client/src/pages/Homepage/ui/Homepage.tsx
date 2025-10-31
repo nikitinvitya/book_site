@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Book} from "@/entities/Book";
 import {getBookListByGenre} from "@/shared/api/getBookListByGenre";
 import classes from './Homepage.module.scss'
+import {Loader} from "@/shared/ui/Loader/Loader";
 
 interface HomepageProps {
   initialBooks: Book[];
@@ -65,7 +66,8 @@ export function Homepage({initialBooks}:HomepageProps) {
     <main className={classes.homepage}>
       <BookList books={books} />
 
-      <div ref={loaderRef} className={classes.loader}>хух</div>
+      {hasMore && <Loader ref={loaderRef} />}
+      {!hasMore && <p>The end of page</p>}
     </main>
   );
 }
