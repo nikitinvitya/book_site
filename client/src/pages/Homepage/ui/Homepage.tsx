@@ -8,6 +8,7 @@ import classes from './Homepage.module.scss'
 import {Loader} from "@/shared/ui/Loader/Loader";
 import {useGenreStore} from "@/app/providers/storeProvider";
 import {GenreButtonPanel} from "@/widgets/GenreButtonPanel";
+import {NavBar} from "@/widgets/NavBar";
 
 interface HomepageProps {
   initialBooks: Book[];
@@ -84,6 +85,7 @@ export function Homepage({initialBooks}:HomepageProps) {
 
   return (
     <main className={classes.homepage}>
+      <NavBar />
       <GenreButtonPanel />
       <BookList books={books} />
 
