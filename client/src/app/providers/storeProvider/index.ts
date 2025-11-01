@@ -1,1 +1,1 @@
-export {useGenreStore} from './hooks/hooks'
+export {useBookStore} from './hooks/hooks'

@@ -4,10 +4,13 @@ import {BookList} from "@/widgets/BookList";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Book} from "@/entities/Book";
 import {getBookListByGenre} from "@/shared/api/getBookListByGenre";
+import {getBooksByName} from "@/shared/api/getBooksByName"
 import classes from './Homepage.module.scss'
 import {Loader} from "@/shared/ui/Loader/Loader";
-import {useGenreStore} from "@/app/providers/storeProvider";
+import {useBookStore} from "@/app/providers/storeProvider";
 import {GenreButtonPanel} from "@/widgets/GenreButtonPanel";
+import {useDebounce} from "@/features/lib";
+import {BOOKS_ON_PAGE, DEBOUNCE_DELAY} from "@/shared/constants/constants";
 
 interface HomepageProps {
   initialBooks: Book[];
@@ -18,10 +21,12 @@ export function Homepage({initialBooks}:HomepageProps) {
   const [books, setBooks] = useState<Book[]>(initialBooks)
   const [offset, setOffset] = useState<number>(initialBooks.length)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isMoreLoading, setIsMoreLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const {genre} = useGenreStore()
+  const {genre, searchQuery} = useBookStore()
   const loaderRef = useRef(null)
   const isInitialMount = useRef(true);
+  const debouncedSearchQuery = useDebounce(searchQuery, DEBOUNCE_DELAY);
 
   useEffect(() => {
     if(isInitialMount.current) {
@@ -31,22 +36,32 @@ export function Homepage({initialBooks}:HomepageProps) {
 
     const fetchNewBooks = async () => {
       setIsLoading(true)
-      const newBooks = await getBookListByGenre(genre, 10, 0)
+
+      let newBooks: Book[]
+      if(debouncedSearchQuery) {
+        newBooks = await getBooksByName(debouncedSearchQuery)
+        console.log(newBooks)
+      }
+      else {
+        newBooks = await getBookListByGenre(genre, BOOKS_ON_PAGE, 0)
+      }
+
       setBooks(newBooks)
-      setOffset(newBooks.length)
-      setHasMore(true)
-      setIsLoading(false)
+      setIsLoading(false);
+      setHasMore(newBooks.length > 0);
+
+      setOffset(newBooks.length);
     }
 
     fetchNewBooks().catch(console.error)
-  }, [genre]);
+  }, [genre, debouncedSearchQuery]);
 
   const loadMoreBooks = useCallback( async () => {
-    if(isLoading || !hasMore) return
+    if(isLoading || !hasMore || isMoreLoading) return
 
-    setIsLoading(true)
+    setIsMoreLoading(true)
 
-    const newBooks = await getBookListByGenre(genre, 10, offset)
+    const newBooks = await getBookListByGenre(genre, BOOKS_ON_PAGE, offset)
 
     if(newBooks.length) {
       setBooks(prev => [...prev, ...newBooks])
@@ -55,12 +70,12 @@ export function Homepage({initialBooks}:HomepageProps) {
       setHasMore(false)
     }
 
-    setIsLoading(false)
-  }, [offset, hasMore, isLoading, genre])
+    setIsMoreLoading(false)
+  }, [offset, hasMore, isLoading, genre, isMoreLoading])
 
 
   useEffect(() => {
-    if (isLoading || !hasMore) return
+    if (isLoading || !hasMore || isMoreLoading) return
 
     const observer = new IntersectionObserver((entries) => {
       const target = entries[0];
@@ -80,15 +95,18 @@ export function Homepage({initialBooks}:HomepageProps) {
       }
     }
 
-  }, [loadMoreBooks, isLoading, hasMore]);
+  }, [loadMoreBooks, isLoading, isMoreLoading, hasMore]);
 
   return (
     <main className={classes.homepage}>
-      <GenreButtonPanel />
-      <BookList books={books} />
+      {!debouncedSearchQuery && <GenreButtonPanel/>}
 
-      {hasMore && <Loader ref={loaderRef} />}
-      {!hasMore && <p>The end of page</p>}
+      {isLoading
+        ? <div className={classes.loaderWrapper}><Loader/></div>
+        : <BookList books={books}/>
+      }
+
+      {!isLoading && !debouncedSearchQuery && hasMore && <Loader ref={loaderRef}/>}
     </main>
   );
 }

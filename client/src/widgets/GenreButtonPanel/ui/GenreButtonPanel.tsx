@@ -1,13 +1,13 @@
 import classes from './GenreButtonPanel.module.scss'
-import {useGenreStore} from "@/app/providers/storeProvider";
+import {useBookStore} from "@/app/providers/storeProvider";
 import {Button} from "@/shared/ui/Button/Button";
-import {BookGenre} from "@/shared/constants/constants";
+import {BookGenre} from "@/shared/constants/bookGenre";
 
 const GENRES = Object.values(BookGenre)
 
 export const GenreButtonPanel = () => {
 
-  const {genre: selectedGenre, setGenre} = useGenreStore()
+  const {genre: selectedGenre, setGenre} = useBookStore()
 
   const normalizeGenreName = (genre: string) => {
     return genre[0].toUpperCase() + genre.slice(1).toLowerCase()

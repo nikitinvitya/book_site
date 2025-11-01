@@ -4,7 +4,8 @@ import Image from 'next/image'
 import React from "react";
 import {Button} from "@/shared/ui/Button/Button";
 import NotFavoriteIcon from "@/shared/assets/favorite.svg"
-import FavoriteIcon from "@/shared/assets/favorite-fill.svg"
+import FavoriteIcon from "@/shared/assets/favoriteFill.svg"
+import NotFoundIcon from "@/shared/assets/notFound.svg"
 
 interface BookCardProps {
   book: Book;
@@ -13,10 +14,13 @@ interface BookCardProps {
 }
 
 export function BookCard({book, onToggleFavorite, isFavorite}: BookCardProps) {
-  const authorNames = book.authors?.map((author) => author.name).join(', ') || 'Unknown authors'
-  const coverURL = book.cover_id
-    ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`
-    : ''
+  const authorNames = book.authors?.map((author) => author.name).join(', ')
+    || book.author_name?.join(', ')
+    || 'Unknown author';
+  const coverId = book.cover_id || book.cover_i
+  const coverURL = coverId
+    ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
+    : NotFoundIcon.src
 
   return (
     <div className={classes.bookCard}>

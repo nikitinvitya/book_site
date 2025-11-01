@@ -1,6 +1,6 @@
 import classes from './BookList.module.scss'
 import {Book, BookCard} from "@/entities/Book";
-import {useFavorite} from "@/features/lib/useFavorite";
+import {useFavorite} from "@/features/lib";
 
 interface BookListProps {
   books: Book[];

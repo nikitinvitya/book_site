@@ -1,9 +1,2 @@
-export enum BookGenre {
-  CLASSIC = "classic",
-  LOVE = "love",
-  HISTORY = "history",
-  SCIENCE = "science",
-  FANTASY = "fantasy",
-  ADVENTURE = 'adventure',
-  BIOGRAPHY = 'biography'
-}
+export const DEBOUNCE_DELAY = 500
+export const BOOKS_ON_PAGE = 10
