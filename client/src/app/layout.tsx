@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import { Roboto } from "next/font/google";
 import './styles/index.scss'
 import React from "react";
+import {NavBar} from "@/widgets/NavBar";
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body>
+      <NavBar />
         {children}
       </body>
     </html>

@@ -4,4 +4,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  > p {
+    font: var(--font-m);
+  }
+}
+
+.loaderWrapper {
+  min-width: 100vw;
+  margin-top: var(--navBar-height);
+  height: calc(100vh - var(--navBar-height));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

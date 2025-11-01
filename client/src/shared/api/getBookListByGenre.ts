@@ -1,8 +1,9 @@
 import {Book, HomepageApiResponse} from "@/entities/Book";
+import {BASE_URL} from "@/shared/constants/api";
 
 export async function getBookListByGenre(genre: string, limit: number = 10, offset: number = 0): Promise<Book[]> {
   try {
-    const resp = await fetch(`http://localhost:8080/api/homepage?subject=${genre}&limit=${limit}&offset=${offset}`, {
+    const resp = await fetch(`${BASE_URL}/homepage?subject=${genre}&limit=${limit}&offset=${offset}`, {
       next: {revalidate: 3600},
       cache: "no-store",
     })
