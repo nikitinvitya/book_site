@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import {BookStorestate} from "../shema/shema";
-import {BookGenre} from "@/shared/constants/constants";
+import {BookGenre} from "@/shared/constants/bookGenre";
 
 
 export const useBookStore = create<BookStorestate>((set) => ({

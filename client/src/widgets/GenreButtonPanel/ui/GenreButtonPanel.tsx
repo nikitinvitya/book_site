@@ -1,7 +1,7 @@
 import classes from './GenreButtonPanel.module.scss'
 import {useBookStore} from "@/app/providers/storeProvider";
 import {Button} from "@/shared/ui/Button/Button";
-import {BookGenre} from "@/shared/constants/constants";
+import {BookGenre} from "@/shared/constants/bookGenre";
 
 const GENRES = Object.values(BookGenre)
 

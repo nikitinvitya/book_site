@@ -10,6 +10,7 @@ import {Loader} from "@/shared/ui/Loader/Loader";
 import {useBookStore} from "@/app/providers/storeProvider";
 import {GenreButtonPanel} from "@/widgets/GenreButtonPanel";
 import {useDebounce} from "@/features/lib";
+import {BOOKS_ON_PAGE, DEBOUNCE_DELAY} from "@/shared/constants/constants";
 
 interface HomepageProps {
   initialBooks: Book[];
@@ -25,7 +26,7 @@ export function Homepage({initialBooks}:HomepageProps) {
   const {genre, searchQuery} = useBookStore()
   const loaderRef = useRef(null)
   const isInitialMount = useRef(true);
-  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+  const debouncedSearchQuery = useDebounce(searchQuery, DEBOUNCE_DELAY);
 
   useEffect(() => {
     if(isInitialMount.current) {
@@ -42,7 +43,7 @@ export function Homepage({initialBooks}:HomepageProps) {
         console.log(newBooks)
       }
       else {
-        newBooks = await getBookListByGenre(genre, 10, 0)
+        newBooks = await getBookListByGenre(genre, BOOKS_ON_PAGE, 0)
       }
 
       setBooks(newBooks)
@@ -60,7 +61,7 @@ export function Homepage({initialBooks}:HomepageProps) {
 
     setIsMoreLoading(true)
 
-    const newBooks = await getBookListByGenre(genre, 10, offset)
+    const newBooks = await getBookListByGenre(genre, BOOKS_ON_PAGE, offset)
 
     if(newBooks.length) {
       setBooks(prev => [...prev, ...newBooks])
