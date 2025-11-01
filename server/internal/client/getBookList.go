@@ -9,14 +9,15 @@ import (
 	"net/url"
 )
 
-func (c *Client) GetBooksBySubject(ctx context.Context, subject string) (*model.SubjectResult, error) {
+func (c *Client) GetBooksBySubject(ctx context.Context, subject string, limit int, offset int) (*model.SubjectResult, error) {
 	endpoint, err := url.Parse(c.baseUrl)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse base url %w", err)
 	}
 	endpoint.Path = fmt.Sprintf("/subjects/%s.json", subject)
 	params := url.Values{}
-	params.Add("limit", "10")
+	params.Add("limit", fmt.Sprintf("%d", limit))
+	params.Add("offset", fmt.Sprintf("%d", offset))
 	endpoint.RawQuery = params.Encode()
 
 	fullURL := endpoint.String()
