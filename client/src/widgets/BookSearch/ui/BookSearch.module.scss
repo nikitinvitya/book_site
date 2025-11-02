@@ -1,17 +1,10 @@
-.bookSearchWrapper {
-  margin: 1rem;
-  width: 80vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .bookSearch {
-    width: 40%;
-    height: 40px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding-left: 1rem;
-    outline: none;
-    font: var(--font-m);
-  }
+.bookSearch {
+  position: absolute;
+  width: 40%;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding-left: 1rem;
+  outline: none;
+  font: var(--font-m);
 }

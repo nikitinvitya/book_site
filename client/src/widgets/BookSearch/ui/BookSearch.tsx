@@ -9,11 +9,9 @@ export const BookSearch = () => {
 
   const {searchQuery, setSearchQuery} = useBookStore()
   return (
-    <div className={classes.bookSearchWrapper}>
       <Input
         className={classes.bookSearch}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder={"Search book"} value={searchQuery}/>
-    </div>
   );
 };
