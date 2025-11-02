@@ -10,20 +10,17 @@ export const BookList = ({books}: BookListProps) => {
 
   const {isFavorite, toggleFavorite} = useFavorite()
 
-
-  if (!books.length) {
-    return <h1>No books found</h1>
-  }
-
   return (
     <div className={classes.bookList}>
-      {books.map((book) => (
+      {books.length
+        ? books.map((book) => (
         <BookCard
           book={book}
           key={book.key}
           onToggleFavorite={() => toggleFavorite(book.key)}
           isFavorite={isFavorite(book.key)} />
-      ))}
+      ))
+      : <h1>No books found</h1>}
     </div>
   );
 };

@@ -3,7 +3,7 @@ const enum AppRoutes {
   FAVORITES = '/favorites',
 }
 
-export const navItems: {path: AppRoutes, text: string}[] = [
+export const NAV_ITEMS: {path: AppRoutes, text: string}[] = [
   {
     path: AppRoutes.HOME,
     text: 'Home',
