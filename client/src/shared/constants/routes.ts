@@ -1,4 +1,4 @@
-const enum AppRoutes {
+export const enum AppRoutes {
   HOME = '/',
   FAVORITES = '/favorites',
 }
