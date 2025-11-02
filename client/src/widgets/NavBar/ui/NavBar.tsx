@@ -15,7 +15,7 @@ export const NavBar = (props: NavBarProps) => {
   const [activePath, setActivePath] = useState('/')
 
   return (
-    <div className={classes.navBar}>
+    <header className={classes.navBar}>
       <BookSearch />
 
       <div className={classes.links}>
@@ -28,7 +28,7 @@ export const NavBar = (props: NavBarProps) => {
           </Link>
         ))}
       </div>
-    </div>
+    </header>
   );
 };
 

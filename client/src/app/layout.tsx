@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import './styles/index.scss'
 import React from "react";
 import {NavBar} from "@/widgets/NavBar";
+import {Footer} from "@/shared/ui/Footer/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body>
       <NavBar />
         {children}
+      <Footer />
       </body>
     </html>
   );
