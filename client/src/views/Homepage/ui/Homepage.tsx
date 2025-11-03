@@ -16,7 +16,7 @@ interface HomepageProps {
   initialBooks: Book[];
 }
 
-export function Homepage({initialBooks}:HomepageProps) {
+export function Homepage({initialBooks}: HomepageProps) {
 
   const [books, setBooks] = useState<Book[]>(initialBooks)
   const [offset, setOffset] = useState<number>(initialBooks.length)
@@ -29,7 +29,7 @@ export function Homepage({initialBooks}:HomepageProps) {
   const debouncedSearchQuery = useDebounce(searchQuery, DEBOUNCE_DELAY);
 
   useEffect(() => {
-    if(isInitialMount.current) {
+    if (isInitialMount.current) {
       isInitialMount.current = false
       return
     }
@@ -38,10 +38,9 @@ export function Homepage({initialBooks}:HomepageProps) {
       setIsLoading(true)
 
       let newBooks: Book[]
-      if(debouncedSearchQuery) {
+      if (debouncedSearchQuery) {
         newBooks = await getBooksByName(debouncedSearchQuery)
-      }
-      else {
+      } else {
         newBooks = await getBookListByGenre(genre, BOOKS_ON_HOME_PAGE, 0)
       }
 
@@ -55,14 +54,14 @@ export function Homepage({initialBooks}:HomepageProps) {
     fetchNewBooks().catch(console.error)
   }, [genre, debouncedSearchQuery]);
 
-  const loadMoreBooks = useCallback( async () => {
-    if(isLoading || !hasMore || isMoreLoading) return
+  const loadMoreBooks = useCallback(async () => {
+    if (isLoading || !hasMore || isMoreLoading) return
 
     setIsMoreLoading(true)
 
     const newBooks = await getBookListByGenre(genre, BOOKS_ON_HOME_PAGE, offset)
 
-    if(newBooks.length) {
+    if (newBooks.length) {
       setBooks(prev => [...prev, ...newBooks])
       setOffset(prev => prev + newBooks.length)
     } else {
@@ -96,14 +95,21 @@ export function Homepage({initialBooks}:HomepageProps) {
 
   }, [loadMoreBooks, isLoading, isMoreLoading, hasMore]);
 
+  const sectionTitle = debouncedSearchQuery
+    ? `Search results for "${debouncedSearchQuery}"`
+    : `Books by genre: ${genre}`;
+
   return (
     <main className={classes.homepage}>
-      {!debouncedSearchQuery && <GenreButtonPanel/>}
+      <section className={classes.bookSection}>
+        <h2>{sectionTitle}</h2>
+        {!debouncedSearchQuery && <GenreButtonPanel/>}
 
-      {isLoading
-        ? <div className={classes.loaderWrapper}><Loader/></div>
-        : <BookList books={books}/>
-      }
+        {isLoading
+          ? <div className={classes.loaderWrapper}><Loader/></div>
+          : <BookList books={books}/>
+        }
+      </section>
 
       {!isLoading && !debouncedSearchQuery && hasMore && <Loader ref={loaderRef}/>}
     </main>
