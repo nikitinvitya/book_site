@@ -1,4 +1,4 @@
-import {Homepage} from "@/pages/Homepage";
+import {Homepage} from "@/views/Homepage";
 import {getBookListByGenre} from "@/shared/api/getBookListByGenre";
 import {BookGenre} from "@/shared/constants/bookGenre";
 import {BOOKS_ON_HOME_PAGE} from "@/shared/constants/constants";

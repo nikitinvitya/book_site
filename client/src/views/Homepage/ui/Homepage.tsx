@@ -40,7 +40,6 @@ export function Homepage({initialBooks}:HomepageProps) {
       let newBooks: Book[]
       if(debouncedSearchQuery) {
         newBooks = await getBooksByName(debouncedSearchQuery)
-        console.log(newBooks)
       }
       else {
         newBooks = await getBookListByGenre(genre, BOOKS_ON_HOME_PAGE, 0)
