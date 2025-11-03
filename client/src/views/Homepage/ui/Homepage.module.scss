@@ -24,7 +24,7 @@
 .loaderWrapper {
   min-width: 100vw;
   margin-top: var(--navBar-height);
-  height: calc(100vh - var(--navBar-height));
+  height: calc(100vh - var(--navBar-height) - var(--footer-height) - 1rem);
   display: flex;
   justify-content: center;
   align-items: center;
