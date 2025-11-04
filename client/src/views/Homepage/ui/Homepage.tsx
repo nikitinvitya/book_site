@@ -11,6 +11,7 @@ import {useBookStore} from "@/app/providers/storeProvider";
 import {GenreButtonPanel} from "@/widgets/GenreButtonPanel";
 import {useDebounce} from "@/features/lib";
 import {BOOKS_ON_HOME_PAGE, DEBOUNCE_DELAY} from "@/shared/constants/constants";
+import {ScrollToTopButton} from "@/features/ScrollToTopButton";
 
 interface HomepageProps {
   initialBooks: Book[];
@@ -111,6 +112,8 @@ export function Homepage({initialBooks}: HomepageProps) {
 
 
       {!isLoading && !debouncedSearchQuery && hasMore && <Loader ref={loaderRef}/>}
+
+      <ScrollToTopButton />
     </main>
   );
 }

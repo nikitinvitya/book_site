@@ -9,6 +9,7 @@ import { Loader } from '@/shared/ui/Loader/Loader';
 import {useDebounce, useFavorite} from "@/features/lib";
 import {BOOKS_ON_FAVORITE_PAGE, DEBOUNCE_DELAY} from "@/shared/constants/constants";
 import {useBookStore} from "@/app/providers/storeProvider";
+import {ScrollToTopButton} from "@/features/ScrollToTopButton";
 
 export function FavoriteBooksPage() {
   const {favorites} = useFavorite();
@@ -107,6 +108,7 @@ export function FavoriteBooksPage() {
       <h2>{sectionTitle}</h2>
       <BookList books={books}/>
       {hasMore && <Loader ref={loaderRef}/>}
+      <ScrollToTopButton />
     </main>
   );
 }
