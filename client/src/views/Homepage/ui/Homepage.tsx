@@ -102,15 +102,13 @@ export function Homepage({initialBooks}: HomepageProps) {
 
   return (
     <main className={classes.homepage}>
-      {isLoading
-        ? <div className={classes.loaderWrapper}><Loader/></div>
-        : <section className={classes.bookSection}>
-          <h2>{sectionTitle}</h2>
-          {!debouncedSearchQuery && <GenreButtonPanel/>}
+      <section className={classes.bookSection}>
+        <h2>{sectionTitle}</h2>
+        {!debouncedSearchQuery && <GenreButtonPanel/>}
 
-          <BookList books={books}/>
-        </section>
-      }
+        {isLoading ? <Loader /> : <BookList books={books}/>}
+      </section>
+
 
       {!isLoading && !debouncedSearchQuery && hasMore && <Loader ref={loaderRef}/>}
     </main>

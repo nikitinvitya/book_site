@@ -1,9 +1,10 @@
 .homepage {
   min-width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
+  flex-grow: 1;
 
   .bookSection {
     margin-top: var(--navBar-height);
