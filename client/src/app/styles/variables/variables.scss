@@ -1,4 +1,16 @@
-body {
+$breakpoint-desktop: 1200px;
+$breakpoint-laptop: 992px;
+$breakpoint-tablet: 768px;
+$breakpoint-largePhones: 576px;
+$breakpoint-phones: 400px;
+
+@mixin respond-above($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+:root {
   --font-family-main: Roboto, 'Times New Romen', Serif;
   --font-size-m: 24px;
   --font-line-m: 32px;
@@ -9,5 +21,5 @@ body {
   --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
 
   --navBar-height: 70px;
-  --footer-height: 50px
+  --footer-height: 50px;
 }
