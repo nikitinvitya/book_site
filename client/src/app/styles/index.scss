@@ -4,6 +4,8 @@
 body {
   font: var(--font-s);
   background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
 
   min-height: 100vh;
 }

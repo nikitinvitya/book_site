@@ -1,23 +1,31 @@
 .homepage {
   min-width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
+  flex-grow: 1;
 
-  > p {
-    font: var(--font-m);
-  }
+  .bookSection {
+    margin-top: var(--navBar-height);
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-  > h1 {
-    margin-top: 1rem;
+    > h2 {
+      margin-top: 1rem;
+      text-align: center;
+      font: var(--font-m);
+    }
   }
 }
 
 .loaderWrapper {
   min-width: 100vw;
   margin-top: var(--navBar-height);
-  height: calc(100vh - var(--navBar-height));
+  height: calc(100vh - var(--navBar-height) - var(--footer-height) - 1rem);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,8 +6,9 @@ import {getFavoriteBookByKeys} from "@/shared/api/getFavoriteBookByKeys";
 import {Book} from "@/entities/Book";
 import {BookList} from "@/widgets/BookList";
 import { Loader } from '@/shared/ui/Loader/Loader';
-import {useFavorite} from "@/features/lib";
-import {BOOKS_ON_FAVORITE_PAGE} from "@/shared/constants/constants";
+import {useDebounce, useFavorite} from "@/features/lib";
+import {BOOKS_ON_FAVORITE_PAGE, DEBOUNCE_DELAY} from "@/shared/constants/constants";
+import {useBookStore} from "@/app/providers/storeProvider";
 
 export function FavoriteBooksPage() {
   const {favorites} = useFavorite();
@@ -16,6 +17,8 @@ export function FavoriteBooksPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
   const loaderRef = useRef(null);
+  const {searchQuery} = useBookStore();
+  const debouncedSearchQuery = useDebounce(searchQuery, DEBOUNCE_DELAY)
 
   useEffect(() => {
     if (favorites === null) return;
@@ -95,10 +98,15 @@ export function FavoriteBooksPage() {
     );
   }
 
+  const sectionTitle = debouncedSearchQuery
+    ? `Search favorite books for "${debouncedSearchQuery}"`
+    : `Favorite Books`;
+
   return (
-    <div className={classes.page}>
+    <main className={classes.page}>
+      <h2>{sectionTitle}</h2>
       <BookList books={books}/>
       {hasMore && <Loader ref={loaderRef}/>}
-    </div>
+    </main>
   );
 }

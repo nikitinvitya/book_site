@@ -1,13 +1,22 @@
 .page {
   display: flex;
-  justify-content: center;
+  min-height: calc(100vh - var(--footer-height) - 1rem);
+  justify-content: start;
   align-items: center;
   flex-direction: column;
+  padding-top: var(--navBar-height);
+
+  > h2 {
+    margin-top: 1rem;
+    text-align: center;
+    font: var(--font-m);
+  }
 }
 
 .wrapper {
   display: flex;
-  height: calc(100vh - var(--navBar-height));
+  padding-top: var(--navBar-height);
+  height: calc(100vh - var(--footer-height) - 1rem);
   justify-content: center;
   align-items: center;
 }
