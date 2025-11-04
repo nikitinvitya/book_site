@@ -1,10 +1,18 @@
+@import "@/app/styles/variables/variables";
+
 .bookSearch {
   position: absolute;
+  left: 1rem;
   width: 40%;
   height: 40px;
   border: 1px solid #000;
   border-radius: 10px;
   padding-left: 1rem;
   outline: none;
-  font: var(--font-m);
+  font: var(--font-ss);
+
+  @include respond-above($breakpoint-laptop) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
