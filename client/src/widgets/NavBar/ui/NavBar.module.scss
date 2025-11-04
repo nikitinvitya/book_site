@@ -11,13 +11,13 @@
 
   .links {
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 1rem;
     display: flex;
-    gap: 20px;
+    gap: 1rem;
 
     .link {
       text-decoration: none;
-      font: var(--font-m);
+      font: var(--font-s);
       color: #000;
       position: relative;
       padding-bottom: 5px;
