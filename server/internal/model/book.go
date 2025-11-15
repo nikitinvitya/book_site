@@ -23,6 +23,7 @@ type SubjectWork struct {
 	CoverID          int      `json:"cover_id"`
 	Title            string   `json:"title"`
 	FirstPublishYear int      `json:"first_publish_year"`
+	Description      string   `json:"description,omitempty"`
 }
 type Author struct {
 	Key  string `json:"key"`
@@ -31,4 +32,12 @@ type Author struct {
 
 type BookKeys struct {
 	Keys []string `json:"keys"`
+}
+
+type BookDetails struct {
+	Description interface{} `json:"description"`
+}
+
+type DescriptionValue struct {
+	Value string `json:"value"`
 }
