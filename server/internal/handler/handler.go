@@ -13,9 +13,14 @@ type BookBySubjectGetter interface {
 	GetBooksBySubject(ctx context.Context, subject string, limit int, offset int) (*model.SubjectResult, error)
 }
 
+type BookDescriptionSearcher interface {
+	GetBookDescription(ctx context.Context, workID string) (string, error)
+}
+
 type BookService interface {
 	BookSearcher
 	BookBySubjectGetter
+	BookDescriptionSearcher
 }
 
 type Handler struct {
