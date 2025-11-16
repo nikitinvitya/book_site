@@ -26,15 +26,17 @@ export function BookCard({book, onToggleFavorite, isFavorite}: BookCardProps) {
     : NotFoundIcon.src
   const {openedBooksKeys, setOpenedBooks} = useBookStore()
   const [description, setDescription] = useState<string | null>(null)
-
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const isOpen = openedBooksKeys.includes(book.key)
 
   useEffect(() => {
 
     if (isOpen || description == null) {
       const fetchDescription = async () => {
+        setIsLoading(true)
         const data: BookDescription = await getBookDescription(book.key)
         setDescription(data.description || "Description not found")
+        setIsLoading(false)
       }
       fetchDescription().catch(() => console.error())
     }
@@ -72,7 +74,11 @@ export function BookCard({book, onToggleFavorite, isFavorite}: BookCardProps) {
           <p>Title: {book.title}</p>
           <span>Author: {authorNames}</span>
           <span>Year: {book.first_publish_year}</span>
-          <p className={classes.descriptionText}>{description}</p>
+          {
+            isLoading
+              ? <p>Loading description...</p>
+              : <p className={classes.descriptionText}>{description}</p>
+          }
         </div>
       )}
     </div>
