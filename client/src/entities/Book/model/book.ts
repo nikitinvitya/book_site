@@ -22,5 +22,9 @@ export interface Book {
   cover_i?: number;
 
   title: string;
-  first_published_year: number;
+  first_publish_year: number;
+}
+
+export interface BookDescription {
+  description: string;
 }
